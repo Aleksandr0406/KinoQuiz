@@ -1,6 +1,17 @@
 import UIKit
 
+protocol MovieQuizViewControllerProtocol: AnyObject {
+    func show(quiz step: QuizStepViewModel)
+    func showAlert(quiz: AlertModel)
+    func deleteBorderAfterAnswer()
+    func highlightImageBorder(isCorrectAnswer: Bool)
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
+}
+
 final class MovieQuizViewController: UIViewController, MovieQuizViewControllerProtocol {
+    
+    // MARK: - Outlets
     
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var noButton: UIButton!
@@ -29,21 +40,21 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
         presenter = MovieQuizPresenter(viewController: self)
     }
     
+    // MARK: - Private functions
+    
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         yesButton.isEnabled = false
         noButton.isEnabled = false
-        
         presenter.yesButtonClicked()
     }
     
     @IBAction private func noButtonClicked(_ sender: UIButton) {
         yesButton.isEnabled = false
         noButton.isEnabled = false
-        
         presenter.noButtonClicked()
     }
     
-    // MARK: - Private functions
+    // MARK: - Others functions
     
     func show(quiz step: QuizStepViewModel) {
         imageView.layer.borderColor = UIColor.clear.cgColor

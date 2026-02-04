@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct GameResult {
     var correct: Int

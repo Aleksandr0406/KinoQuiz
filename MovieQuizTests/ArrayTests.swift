@@ -5,11 +5,10 @@
 //  Created by 1111 on 03.10.2024.
 //
 
-import Foundation
 import XCTest
 @testable import MovieQuiz
 
-class ArrayTests: XCTestCase {
+final class ArrayTests: XCTestCase {
     func testGetValueInRange() throws {
         //Given
         let array = [1, 1, 2, 3, 5]

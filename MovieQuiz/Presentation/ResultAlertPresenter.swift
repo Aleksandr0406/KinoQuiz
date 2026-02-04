@@ -5,10 +5,13 @@
 //  Created by 1111 on 12.09.2024.
 //
 
-import Foundation
 import UIKit
 
-class ResultAlertPresenter: AlertPresenterProtocol {
+protocol AlertPresenterProtocol {
+    func presentAlert(quiz result: AlertModel)
+}
+
+final class ResultAlertPresenter: AlertPresenterProtocol {
     
     weak var delegate: MovieQuizViewController?
     

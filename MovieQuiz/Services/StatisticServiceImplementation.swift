@@ -6,10 +6,23 @@
 //
 
 import Foundation
-import UIKit
+
+protocol StatisticServiceProtocol {
+    var gamesCount: Int { get }
+    var bestGame: GameResult { get }
+    var totalAccuracy: Double { get }
+    
+    func store(correct count: Int, total amount: Int)
+}
 
 final class StatisticServiceImplementation: StatisticServiceProtocol {
+    
     private let storage: UserDefaults = .standard
+    private var correctAnswers: Int {
+        get { storage.integer(forKey: Keys.correctAnswers.rawValue) }
+        set { storage.setValue(newValue, forKey: Keys.correctAnswers.rawValue) }
+    }
+    
     private enum Keys: String {
         case correct
         case bestGame
@@ -19,10 +32,12 @@ final class StatisticServiceImplementation: StatisticServiceProtocol {
         case correctAnswers
         case totalAccuracy
     }
+    
     var gamesCount: Int {
         get { storage.integer(forKey: Keys.gamesCount.rawValue) }
         set { storage.set(newValue, forKey: Keys.gamesCount.rawValue) }
     }
+    
     var bestGame: GameResult {
         get {
             let correct = storage.integer(forKey: Keys.correct.rawValue)
@@ -36,10 +51,7 @@ final class StatisticServiceImplementation: StatisticServiceProtocol {
             storage.set(newValue.date, forKey: Keys.date.rawValue)
         }
     }
-    private var correctAnswers: Int {
-        get { storage.integer(forKey: Keys.correctAnswers.rawValue) }
-        set { storage.setValue(newValue, forKey: Keys.correctAnswers.rawValue) }
-    }
+
     var totalAccuracy: Double {
         get {  storage.double(forKey: Keys.totalAccuracy.rawValue) }
         set {  storage.set(newValue, forKey: Keys.totalAccuracy.rawValue) }

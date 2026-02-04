@@ -5,7 +5,6 @@
 //  Created by 1111 on 03.10.2024.
 //
 
-import Foundation
 import XCTest
 @testable import MovieQuiz
 
@@ -60,7 +59,7 @@ struct StubNetworkClient: NetworkRouting {
     }
 }
 
-class MoviesLoaderTests: XCTestCase {
+final class MoviesLoaderTests: XCTestCase {
     func testSuccessLoading() throws {
         //Given
         let stubNetworkClient = StubNetworkClient(emulateError: false)

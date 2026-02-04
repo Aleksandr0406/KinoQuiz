@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 protocol MoviesLoading {
     func loadMovies(handler: @escaping (Result<MostPopularMovies, Error>) -> Void)
@@ -14,13 +13,12 @@ protocol MoviesLoading {
 
 struct MoviesLoader: MoviesLoading  {
     private let networkClient: NetworkRouting
+    private var mostPopularMoviesUrl: URL? {
+        URL(string: Constants.mostPopularMoviesPath)
+    }
     
     init(networkClient: NetworkRouting = NetworkClient()) {
         self.networkClient = networkClient
-    }
-    
-    private var mostPopularMoviesUrl: URL? {
-        URL(string: Constants.mostPopularMoviesPath)
     }
     
     func loadMovies(handler: @escaping (Result<MostPopularMovies, Error>) -> Void) {
@@ -41,8 +39,8 @@ struct MoviesLoader: MoviesLoading  {
     }
 }
 
-extension MoviesLoader {
-    enum Constants {
+private extension MoviesLoader {
+    private enum Constants {
         static let mostPopularMoviesPath = "https://tv-api.com/en/API/Top250Movies/k_zcuw1ytf"
     }
 }
